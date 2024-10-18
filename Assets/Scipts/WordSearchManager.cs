@@ -55,18 +55,6 @@ public class WordSearchManager : MonoBehaviour
             wordListText.text += word + "\n";
         }
     }
-    public void CheckWord(string selectedWord)
-    {
-        if (wordTrie.Search(selectedWord))
-        {
-            Debug.Log("word found: " + selectedWord);
-            //logic for making the word as found and updating the UI
-        }
-        else
-        {
-            Debug.Log("Word not found: " + selectedWord);
-        }
-    }
     public void AddLetterToSelection(string letter)
     {
         selectedLetters.Add(letter);
@@ -82,9 +70,20 @@ public class WordSearchManager : MonoBehaviour
         if (wordTrie.Search(currentWord))
         {
             Debug.Log("Word found: " + currentWord);
-            //mark word as found, and reset the selection
-            selectedLetters.Clear();
             //optionally, update the UI to show words been found
+            foreach (string word in wordsToFind)
+            {
+                if (word == currentWord)
+                {
+                    wordsToFind.Remove(word);
+                    DisplayWords();
+
+                    if (wordsToFind.Count == 0)
+                    {
+                        Debug.Log("well done");
+                    }
+                }
+            }
             
         }
         else
@@ -92,6 +91,7 @@ public class WordSearchManager : MonoBehaviour
             Debug.Log("Word not found: " + currentWord);
             // reset the selection but allow player to try again     
         }
+        // reselt the selection and color
         ClearSelectedLetters();
     }
     public void ClearSelectedLetters()
