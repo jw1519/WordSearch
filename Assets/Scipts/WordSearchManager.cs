@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WordSearchManager : MonoBehaviour
 {
@@ -81,10 +83,10 @@ public class WordSearchManager : MonoBehaviour
                     if (wordsToFind.Count == 0)
                     {
                         Debug.Log("well done");
+                        SceneManager.LoadScene("Menu");
                     }
                 }
             }
-            
         }
         else
         {
